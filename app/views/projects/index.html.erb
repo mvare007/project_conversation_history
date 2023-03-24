@@ -1,0 +1,22 @@
+<h1>Projects</h1>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Status</th>
+    <th>Comments</th>
+    <th>Actions</th>
+  </tr>
+	<% @projects.each do |project| %>
+		<tr style="text-align: center;">
+			<td><%= project %></td>
+			<td><%= project.status %></td>
+			<td><%= project.comments.count %></td>
+			<td>
+				<ul>
+					<li><%= link_to "History", conversation_history_project_path(project) %></li>
+					<li><%= link_to "Delete", project_path(project), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %></li>
+				</ul>
+			</td>
+		</tr>
+	<% end %>
+</table>

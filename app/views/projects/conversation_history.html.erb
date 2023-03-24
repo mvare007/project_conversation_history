@@ -1,0 +1,8 @@
+<h1>Project <%= @project %> Conversation History</h1>
+<ul>
+	<% @project.status_transitions.each do |status_transition| %>
+		<li><%= status_transition %> - <%= time_ago_in_words(status_transition.created_at) %> ago</li>
+	<% end %>
+</ul>
+<%= render 'form', project: @project %>
+

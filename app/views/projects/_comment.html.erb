@@ -1,0 +1,14 @@
+<%= fields_for "project[comments_attributes][#{comment.persisted? ? comment.id : Time.now.to_i }]", comment do |comments_subform| %>
+  <fieldset>
+		<%= comments_subform.text_area :content, cols: 100, rows: 3, required: true %>
+		<%= comments_subform.hidden_field :id %>
+		<%= comments_subform.label :author %>
+		<%= comments_subform.text_field :author, disabled: comments_subform.object&.persisted?, required: true %>
+		<% if comments_subform.object&.persisted? %>
+			<small><%= time_ago_in_words(comments_subform.object.created_at) %> ago</small>
+		<% end %>
+		<% if comments_subform.object&.edited %>
+			<small>(Edited)</small>
+		<% end %>
+  </fieldset>
+<% end %>

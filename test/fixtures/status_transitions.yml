@@ -1,0 +1,4 @@
+one:
+  previous_status: started
+  new_status: finished
+  project_id: 1

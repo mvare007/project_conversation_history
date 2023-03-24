@@ -1,0 +1,10 @@
+one:
+  author: Maria
+  content: This is the first comment for Project One
+  project_id: 1
+
+two:
+  author: John
+  content: This is the second comment for Project One
+  project_id: 1
+

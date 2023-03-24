@@ -1,0 +1,45 @@
+
+<%= form_with model: project,
+			html: { role: 'form' },
+			data: {
+				controller: 'nested-form',
+				nested_form_partial_url_value: comments_field_projects_path,
+				nested_form_nested_form_id_value: 'comments'
+			} do |f| %>
+
+	<% if project.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(project.errors.count, "error") %> prohibited this project from being saved:</h2>
+      <ul>
+        <% project.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= f.label :status do %>
+      Status
+    <% end %>
+		<%= f.select :status,
+					options_for_select(
+						Project.statuses.map { |key, value| [key.titleize, Project.statuses.key(value)] }, project.status
+					) %>
+  </div>
+
+	<hr>
+	<h3>Comments</h3>
+	<div class="mb-2">
+    <%= button_tag "Add", type: :button, data: { action: "nested-form#getNestedFormPartial" } %>
+  </div>
+		<div id="comments">
+			<%= render partial: "comment", collection: @comments %>
+		</div>
+	<hr>
+
+	<div>
+		<%= f.submit %>
+		<%= link_to 'Cancel', projects_path %>
+	</div>
+<% end %>
